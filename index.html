@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <style>
+       .delete{
+           text-decoration: line-through;
+           color:green;
+       }
+        .active{
+            background: blue;
+        }
+    </style>
+</head>
+<body>
+<div id="root">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                <h1>todoList</h1>
+                <input type="text" v-model="val" @keyup.enter="addVal">
+                <div>
+                    <ul>
+                        <li :class="{delete:a.select}" v-for="(a,index) in all" @dblclick="textInput(a)"><span v-show="current !==a">
+                            <input type="checkbox" :key="index" v-model="a.select">{{a.hobby}}
+                        </span>
+                            <input type="text" v-show="current===a" v-model="a.hobby" @blur="cancel" @keyup.enter="cancel" v-focus="current ===a">  <button class="btn btn-default pull-right btn-sm" @click="removeVal(index)">&times;</button> </li>
+                    </ul>
+                </div>
+                <div>
+                    <ul>
+                        <li :class="{active:hash=='all'}"><a href="#/all">全部任务{{allwork}}</a></li>
+                        <li :class="{active:hash=='finish'}"><a href="#/finish">已完成{{done}}</a></li>
+                        <li :class="{active:hash=='unfinish'}"><a href="#/unfinish">待完成{{working}}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script src="node_modules/axios/dist/axios.js"></script>
+<script src="index.js"></script>
+</body>
+</html>
